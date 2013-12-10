@@ -58,3 +58,7 @@ The known issues are:
 But there will also be many unknown issues... 
 
  
+Contributing
+------------
+
+I'm delighted if others want to contribute to this project, but please talk to me about what you are planning to do first, so that we don't get any crossed wires.
