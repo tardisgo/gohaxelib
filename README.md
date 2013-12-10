@@ -1,7 +1,7 @@
 gohaxelib
 =========
 
-This software enables Go programmers using the Go->Haxe transpiler software (yet to be published and currently unnamed) to call Haxe libraries.
+This software enables Go programmers using the Go->Haxe transpiler software (yet to be published) to call Haxe libraries.
 
 Go definitions of Haxe libraries currently available are:
 
@@ -20,7 +20,7 @@ Within the library, each Go name converted from Haxe has a leading capital lette
 -	S = JavaScript  
 -	X = cross-platform
 
-Dots "." in Haxe names are converted to underscore "_" in Go, and underscore to tripple underscore "___". Haxe class fields are used through accessor functions with the suffix "_goset"" and "_goget". So for example Haxe class field "haxe.Serializer.USE_CACHE" (http://api.haxe.org/haxe/Serializer.html#USE_CACHE) generates two entries:
+Dots "." in Haxe names are converted to underscore in Go, and underscore to tripple underscore. Haxe class fields are used through accessor functions with the suffix "_goset" and "_goget". So for example Haxe class field "haxe.Serializer.USE_CACHE" (http://api.haxe.org/haxe/Serializer.html#USE_CACHE) generates two entries:
 - func Xhaxe_Serializer_USE___CACHE_goget()  bool { return false; }
 - func Xhaxe_Serializer_USE___CACHE_goset(bool){}
 
