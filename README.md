@@ -10,7 +10,7 @@ Go definitions of Haxe libraries currently available are:
 
 The leading underscore "_" in the library names signals to the transpiler that they are Haxe packages (but see "Status & Issues" section below).
 
-Within the library, each Go name converted from Haxe has a leading capital letter to make it exported in Go and to signal in which Haxe execution environment the name can be used (please let me know if there is en experimental one I have missed):
+Within the library, each Go name converted from Haxe has a leading capital letter to make it exported in Go and to signal in which Haxe execution environment the name can be used (please let me know if there is an experimental one I have missed):
 -	C = (reserved for C see experimental https://github.com/waneck/haxe-genc/)
 - 	D = (reserved for Dart see experimental https://bitbucket.org/AndrewVernon/hx2dart ) 
 -	F = Flash (v9) 
