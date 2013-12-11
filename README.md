@@ -10,15 +10,18 @@ Go definitions of Haxe libraries currently available are:
 
 The leading underscore "_" in the library names signals to the transpiler that they are Haxe packages (but see "Status & Issues" section below).
 
-Within the library, each Go name converted from Haxe has a leading capital letter to make it exported in Go and to signal in which Haxe execution environment the name can be used:
--	C = C# 
+Within the library, each Go name converted from Haxe has a leading capital letter to make it exported in Go and to signal in which Haxe execution environment the name can be used (please let me know if there is en experimental one I have missed):
+-	C = (reserved for C see experimental https://github.com/waneck/haxe-genc/)
+- 	D = (reserved for Dart see experimental https://bitbucket.org/AndrewVernon/hx2dart ) 
 -	F = Flash (v9) 
 -	H = PHP 
 -	J = Java 
 -	N = Neko 
 -	P = C++ 
+- 	R = C# 
 -	S = JavaScript  
 -	X = cross-platform
+-	Y = (reserved for Python see experimental https://github.com/frabbit/hx2python )
 
 Dots "." in Haxe names are converted to underscore in Go, and underscore to triple underscore. Haxe class fields are used through accessor functions with the suffix underscore “goset" and underscore "goget". So for example Haxe class field "haxe.Serializer.USE_CACHE" (http://api.haxe.org/haxe/Serializer.html#USE_CACHE) generates two entries:
 - func Xhaxe_Serializer_USE___CACHE_goget()  bool { return false; }

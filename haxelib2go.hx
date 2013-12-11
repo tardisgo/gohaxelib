@@ -17,7 +17,7 @@ class Haxelib2go {
 		/* The standard library */
         out+=xmlFile("api-xml/cpp.xml","cpp","P");
         out+=xmlFile("api-xml/cross.xml","cross","X");
-        out+=xmlFile("api-xml/cs.xml","cs","C");
+        out+=xmlFile("api-xml/cs.xml","cs","R");
         out+=xmlFile("api-xml/flash9.xml","flash9","F");
         out+=xmlFile("api-xml/java.xml","java","J");
         out+=xmlFile("api-xml/js.xml","js","S");
