@@ -19,6 +19,6 @@ func Platform() string { return "go" }
 // Return a string containing the Go code position in terms of file name and line number
 func CPos() string { return "<<go code pos>>" } // the return value is overwridden by the transpiler, here just for Go use
 
-// ZiLen() returns the runtime native string length of the chinese character "字", meaning "written character", which is pronounced "zi" in Mandarin.
+// Zilen() returns the runtime native string length of the chinese character "字", meaning "written character", which is pronounced "zi" in Mandarin.
 // For UTF8 encoding this value is 3, for UTF16 encoding this value is 1.
-func Zilen() int { return 3 }
+func Zilen() uint { return 3 }
