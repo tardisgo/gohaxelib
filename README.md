@@ -3,9 +3,9 @@ gohaxelib
 
 This software enables Go programmers (http://golang.org) using the Go->Haxe transpiler software (yet to be published) to call Haxe libraries and builtin functions.
 
-Go definitions of the builtin functions in the transpiler:
+Go utility functions for Haxe and builtin functions in the transpiler:
 
-- import "github.com/elliott5/gohaxelib/hxbuiltin"
+- import "github.com/elliott5/gohaxelib/hxutil"
 
 Go definitions of Haxe libraries currently available are:
 
