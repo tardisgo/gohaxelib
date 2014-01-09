@@ -52,7 +52,7 @@ This is experimental code that is certain to change, so it is probably not even 
 Long term, the functionality in this code needs to be repackaged into a user-oriented tool that can generate the Go definitions from a given XML Haxe definition file.
 
 The known issues are:
-- It is poorly commented.
+- Definitions from "extends" and/or "implements" declarations are not generated yet, making the tool less useful than it looks.
 - There is no command line interface, everything is hard coded.
 - There is no way to create new library definitions without changing the code.
 - There is no auto-update process to follow api updates.
@@ -61,6 +61,7 @@ The known issues are:
 - Go code contains stub functions so that it will compile using the existing compilers, this allows Go native and Go transpiler code to co-exist, provided the functions never get called by the native code. This may not be the best route long term, experimentation may be required because this issue relates to the very different ways that Haxe and Go handle target-specific conditional compilation. For the moment, stub functions seem least likely to cause problems. 
 - Haxe structures with field names are not currently used by the Go implementation (it treats structures as arrays), extra coding may be required to allow them to be accessed from Go along the lines of goset() and goget().
 - The licensing declarations may need to be improved for included code, I'm not sure of the exact rules.
+- It is not as well commented as I would wish.
 
 But there will also be many unknown issues... 
 
