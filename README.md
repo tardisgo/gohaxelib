@@ -49,7 +49,7 @@ This is experimental code that is certain to change, so it is probably not even 
 Long term, the functionality in this code needs to be repackaged into a user-oriented tool that can generate the Go definitions from a given XML Haxe definition file.
 
 The known issues are:
-- Definitions that should be generated from "extends" and/or "implements" declarations are not generated yet, making the tool less useful than it looks.
+- Definitions that should be generated from "extends" and/or "implements" declarations are not generated yet, so you must do an explict cast in Go to the required type in order to access this "super-class" functionality.
 - There is no command line interface, everything is hard coded, so there is no way to create new library definitions without changing the code.
 - There is no auto-update process to follow api updates.
 - There is no interface version tracking.
