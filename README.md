@@ -15,6 +15,7 @@ Within the library, each Go name converted from Haxe has a leading capital lette
 -	C = (reserved for C see experimental https://github.com/waneck/haxe-genc/)
 - 	D = (reserved for Dart see experimental https://bitbucket.org/AndrewVernon/hx2dart ) 
 -	F = Flash (v9) 
+-   G = (reserved for Go [!], see experimental https://code.google.com/p/haxego/)
 -	H = PHP 
 -	J = Java 
 -	N = Neko 
