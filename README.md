@@ -3,6 +3,8 @@ gohaxelib
 
 This software helps [Go](http://golang.org) programmers using the [TARDIS Go->Haxe transpiler](http:tardisgo.github.io) to call Haxe libraries by providing automated definitions of those libraries in Go.
 
+WARNING: This tool is incomplete and has an API that will change as it improves.
+
 Go definitions of Haxe libraries currently available are:
 
 - import "github.com/tardisgo/gohaxelib/_haxeapi"  // the api for the standard Haxe library http://api.haxe.org/
@@ -40,7 +42,7 @@ See the CType api documentation at http://api.haxe.org/haxe/rtti/CType.html . Un
 
 To run the program to generate the library definitions (in the simplest but slowest way), from the top level directory run $ haxe -main Haxelib2go --interp
 
-Obviously you will need to have the Haxe 3.0.1+ compiler installed to do this, see http://haxe.org/download .
+Obviously you will need to have the Haxe compiler installed to do this, see http://haxe.org/download .
 
 Status & Issues
 ---------------
