@@ -1,6 +1,8 @@
 gohaxelib
 =========
 
+THIS PROJECT IS STILL IN DEVELOPMENT (Dec 2014) AND NOT CURRENTLY WORKING
+
 This software helps [Go](http://golang.org) programmers using the [TARDIS Go->Haxe transpiler](http:tardisgo.github.io) to call Haxe libraries by providing automated definitions of those libraries in Go.
 
 WARNING: This tool is incomplete and has an API that will change as it improves.
