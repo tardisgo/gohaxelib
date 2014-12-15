@@ -1,16 +1,27 @@
 gohaxelib
 =========
 
-THIS PROJECT IS STILL IN DEVELOPMENT (Dec 2014) AND NOT CURRENTLY WORKING
-
 This software helps [Go](http://golang.org) programmers using the [TARDIS Go->Haxe transpiler](http:tardisgo.github.io) to call Haxe libraries by providing automated definitions of those libraries in Go.
 
-WARNING: This tool is incomplete and has an API that will change as it improves.
+STATUS: in a working state (Dec 2014), but may be subject to further change especially as generics are not modelled yet.
 
 Go definitions of Haxe libraries currently available are:
 
-- import "github.com/tardisgo/gohaxelib/_haxeapi"  // the api for the standard Haxe library http://api.haxe.org/
-- import "github.com/tardisgo/gohaxelib/_openfl"   // the api for the OpenFL framework http://www.openfl.org/developer/documentation/api/
+-  // the api for the standard Haxe library http://api.haxe.org/
+- import "github.com/tardisgo/gohaxelib/_cpp" // c++ api
+- import "github.com/tardisgo/gohaxelib/_cross" // cross-platform api
+- import "github.com/tardisgo/gohaxelib/_cs" // c# api
+- import "github.com/tardisgo/gohaxelib/_flash" // flash api
+- import "github.com/tardisgo/gohaxelib/_java" // Java api
+- import "github.com/tardisgo/gohaxelib/_js" // Java Script api
+- import "github.com/tardisgo/gohaxelib/_neko" // neko api
+- import "github.com/tardisgo/gohaxelib/_php" // PHP api
+-
+- // the api for the OpenFL framework http://www.openfl.org/developer/documentation/api/
+- import "github.com/tardisgo/gohaxelib/_openfl"   
+- // Note that to use OpenFL the tardisgo command must be run with the "-tags" flag set for the correct platform:
+- // 'openfl_android' 'openfl_blackberry' 'openfl_firefox' 'openfl_flash' 'openfl_html5' 
+- // 'openfl_ios' 'openfl_linux' 'openfl_mac' 'openfl_tizen' 'openfl_windows'
 
 The leading underscore "_" in the library names signals to the transpiler that they are Haxe packages (but see "Status & Issues" section below).
 
@@ -29,9 +40,13 @@ Within the library, each Go name converted from Haxe has a leading capital lette
 -	X = cross-platform
 -	Y = (reserved for Python see experimental https://github.com/frabbit/hx2python )
 
-Dots "." in Haxe names are converted to underscore in Go, and underscore to triple underscore. Haxe class fields are used through accessor functions with the suffix underscore “goset" and underscore "goget". So for example Haxe class field ["haxe.Serializer.USE_CACHE"] (http://api.haxe.org/haxe/Serializer.html#USE_CACHE) generates two entries:
-- func Xhaxe_Serializer_USE___CACHE_goget()  bool { return false; }
-- func Xhaxe_Serializer_USE___CACHE_goset(bool){}
+The number of parameters to be passed to a Haxe call is signified by a trailing "_number" in the name.
+
+Dots "." in Haxe names are converted to underscore in Go, and underscore to triple underscore. 
+
+Haxe class fields are used through accessor functions with the suffix underscore “goset" and underscore "goget". So for example Haxe class field ["haxe.Serializer.USE_CACHE"] (http://api.haxe.org/haxe/Serializer.html#USE_CACHE) generates two entries:
+- func Xhaxe_Serializer_USE___CACHE_g()  bool { return false; }
+- func Xhaxe_Serializer_USE___CACHE_s(bool){}
 
 The Go type "uintptr" maps to Haxe type "Dynamic", it is used extensively where a suitable Go type does not exist. 
 
@@ -54,13 +69,12 @@ This is experimental code that is certain to change, so it is probably not even 
 Long term, the functionality in this code needs to be repackaged into a user-oriented tool that can generate the Go definitions from a given XML Haxe definition file.
 
 The known issues are:
-- Definitions that should be generated from "extends" and/or "implements" declarations are not generated yet, so you must do an explict cast in Go to the required type in order to access this "super-class" functionality.
 - There is no command line interface, everything is hard coded, so there is no way to create new library definitions without changing the code.
 - There is no auto-update process to follow api updates.
 - There is no interface version tracking.
 - Each library name currently has a leading underscore "_" to signal to the TARDIS Go transpiler that it is a Haxe library, so that it's Go code is replaced by the correct Haxe code post-translation, but this requirement may change as the main transpiler software evolves. 
 - Go code contains stub functions so that it will compile using the existing compilers, this should allow Go native and TARDIS Go transpiler code to co-exist, provided the functions never get called by the native code. This may not be the best route long term, experimentation may be required because this issue relates to the very different ways that Haxe and Go handle target-specific conditional compilation. For the moment, stub functions seem least likely to cause problems. 
-- Haxe structures with field names are not currently used by the TARDIS Go implementation (it treats structures as arrays), extra coding may be required to allow them to be accessed from Go along the lines of goset() and goget().
+- Haxe structures with field names are not currently used by the TARDIS Go implementation (it treats structures as arrays), extra coding may be required to allow them to be accessed from Go along the lines of _g() and _s() acessors.
 - The licensing declarations may need to be improved for included code, the   [author](https://github.com/elliott5) is not sure of the exact rules.
 
 But there will also be many unknown issues... 

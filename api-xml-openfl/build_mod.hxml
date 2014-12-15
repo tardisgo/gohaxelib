@@ -1,0 +1,132 @@
+# Generate single haxedoc.xml for haxelib
+
+-xml ../haxedoc.xml
+-cpp obj/docs
+-D display
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+# Generate platform-specific XML for documentation output
+
+-xml Flash.xml
+-cpp obj/docs
+-D display
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Windows.xml
+-cpp obj/docs
+-D display
+-D native
+-D windows
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Mac.xml
+-cpp obj/docs
+-D display
+-D native
+-D mac
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Linux.xml
+-cpp obj/docs
+-D display
+-D native
+-D linux
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml iOS.xml
+-cpp obj/docs
+-D display
+-D native
+-D ios
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Android.xml
+-cpp obj/docs
+-D display
+-D native
+-D android
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml BlackBerry.xml
+-cpp obj/docs
+-D display
+-D native
+-D blackberry
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Tizen.xml
+-cpp obj/docs
+-D display
+-D native
+-D tizen
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml Firefox.xml
+-cpp obj/docs
+-D display
+-D html5
+-D firefox
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+-xml HTML5.xml
+-cpp obj/docs
+-D display
+-D html5
+ImportAll
+-lib lime
+-lib openfl
+--no-output
+
+--next
+
+#-cmd haxelib run dox -i . -in openfl
