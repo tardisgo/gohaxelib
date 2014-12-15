@@ -18,7 +18,7 @@ The api for the standard Haxe library http://api.haxe.org/
 - import "github.com/tardisgo/gohaxelib/_neko" // neko api
 - import "github.com/tardisgo/gohaxelib/_php" // PHP api
 
-The api for the OpenFL framework http://www.openfl.org/developer/documentation/api/
+The api for the OpenFL framework http://www.openfl.org/documentation/api/
 ---
 - import "github.com/tardisgo/gohaxelib/_openfl"   
 - // Note that to use OpenFL the tardisgo command must be run with the "-tags" flag set for the correct platform:
