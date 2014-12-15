@@ -7,7 +7,8 @@ STATUS: in a working state (Dec 2014), but may be subject to further change espe
 
 Go definitions of Haxe libraries currently available are:
 
--  // the api for the standard Haxe library http://api.haxe.org/
+The api for the standard Haxe library http://api.haxe.org/
+---
 - import "github.com/tardisgo/gohaxelib/_cpp" // c++ api
 - import "github.com/tardisgo/gohaxelib/_cross" // cross-platform api
 - import "github.com/tardisgo/gohaxelib/_cs" // c# api
@@ -16,8 +17,9 @@ Go definitions of Haxe libraries currently available are:
 - import "github.com/tardisgo/gohaxelib/_js" // Java Script api
 - import "github.com/tardisgo/gohaxelib/_neko" // neko api
 - import "github.com/tardisgo/gohaxelib/_php" // PHP api
--
-- // the api for the OpenFL framework http://www.openfl.org/developer/documentation/api/
+
+The api for the OpenFL framework http://www.openfl.org/developer/documentation/api/
+---
 - import "github.com/tardisgo/gohaxelib/_openfl"   
 - // Note that to use OpenFL the tardisgo command must be run with the "-tags" flag set for the correct platform:
 - // 'openfl_android' 'openfl_blackberry' 'openfl_firefox' 'openfl_flash' 'openfl_html5' 
