@@ -3,7 +3,7 @@ gohaxelib
 
 This software helps [Go](http://golang.org) programmers using the [TARDIS Go->Haxe transpiler](http:tardisgo.github.io) to call Haxe libraries by providing automated definitions of those libraries in Go.
 
-STATUS: in a working state (Dec 2014), but may be subject to further change especially as generics are not modelled yet.
+STATUS: in a working state, but may be subject to further change especially as generics are not modelled yet.
 
 Go definitions of Haxe libraries currently available are:
 

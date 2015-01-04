@@ -151,22 +151,18 @@ class Haxelib2go {
     	return
     		switch(t){
     		case TTypedecl(tt):
-    			//if(tt.isPrivate) // may need private types for inherritance
-  				//	"";
-				//else
-				//	"type "+h+d2_(tt.path)+" "+haxe2goType(tt.type,h)+" // TTypedecl\n"; //TODO extend
-				"type "+h+d2_(tt.path)+" uintptr /* TTypedecl -  "+tt.type+" */\n"; 
-
+    			switch(tt.type){
+    			case CFunction(args,_ret):
+					"type "+h+d2_(tt.path)+" interface{} /* TTypedecl -  "+tt.type+" */\n"; 	
+				default:
+					"type "+h+d2_(tt.path)+" uintptr /* TTypedecl -  "+tt.type+" */\n"; 
+				}
 			case TPackage(name,full,subs): 
 				var ret:String = "";
 				for(s in subs)
 					ret += tt(s,h);
 				ret;
 			case TEnumdecl(e):
-				//if(e.isPrivate)
-				//	"";
-				//else
-				//	"type "+h+ d2_(e.path) + " uintptr // TEnumdecl\n"; //TODO extend
 				var ret = "type "+h+d2_(e.path)+" uintptr /* Enumdecl - "+e.constructors+" */\n\n";
 				for(i in e.constructors)
 					ret += "func "+h+d2_(e.path)+"_"+i.name+"_g() "+h+d2_(e.path)+" { return 0 }\n\n";
@@ -203,8 +199,6 @@ class Haxelib2go {
 											ret += h+a.name ;
 											if(!a.opt)
 												ret += "_type_"+noComment(haxe2goParamType(a.t,h));
-											//if(a.opt)
-											//	ret += "_optional";
 											if(a.value!=null && a.value!="null")
 												ret += "_default_"+forGo(a.value);
 											if(a.opt)
@@ -222,7 +216,6 @@ class Haxelib2go {
 									ret += "\n\n";
 								}
 							default:
-								//ret += "var "+h+d2_(c.path)+"_"+d2_(s.name)+" "+haxe2goType(s.type,h)+"\n";
 								// add getters & setters for static vars
 								ret += "func "+h+ d2_(c.path) + "_"+d2_(s.name) +"_g() ";
 								ret += haxe2goFuncBody("Get",s.type,h,c.path+"."+s.name,"",0,"","");
@@ -247,6 +240,8 @@ class Haxelib2go {
 						ret += "type "+ typName+ " "+scName+" // TClassdecl\n\n";
 					}
 					ret += "func (x " + h+d2_(c.path) + ") String() string { return `` }\n";			
+					dotMap.set(clName+"_String", // need at least one entry in the list for each class, to id the superclass
+						{key: clName, super: scName, name: "String", body: "() string { return `` }"} );										
 					for(m in c.fields)
 						if(m.isPublic)	{	
 							switch(m.type){
@@ -270,8 +265,6 @@ class Haxelib2go {
 											bod += h+a.name ;
 											if(!a.opt)
 												bod += "_type_"+noComment(haxe2goParamType(a.t,h));
-											//if(a.opt)
-											//	bod += "_optional";
 											if(a.value!=null && a.value!="null")
 												bod += "_default_"+forGo(a.value);
 											if(a.opt)
@@ -294,6 +287,14 @@ class Haxelib2go {
 									ret += bod+"\n\n";
 									if(mName!="")
 										dotMap.set(clName+"_"+mName, {key: clName, super: scName, name: mName, body: bod} );										
+								}
+								// now enable the function to be overwritten
+								if(m.name!="new"){
+									ret += "func (x "+h+ d2_(c.path) + ") "+h+d2_(m.name) +"_s";
+									var bod = "(v interface{})"; // actually a dynamic with a function inside
+									bod += haxe2goFuncBody("Fset",m.type,h,m.name,"x",0,"","");
+									ret += bod+"\n\n";
+									dotMap.set(clName+"_"+h+d2_(m.name)+"_s", {key: clName, super: scName, name: h+d2_(m.name)+"_s", body: bod} );
 								}
 							default:
 								{									
@@ -351,7 +352,7 @@ class Haxelib2go {
 
  	static function haxe2goParamType(t:haxe.rtti.CType,h:String):String { // mapping of haxe to Go types, for use as a parameter
  		var base:String = haxe2goType(t,h);
- 		if(StringTools.startsWith(base,"uintptr"))
+ 		if(StringTools.startsWith(base,"/*CFunction*/"))
  			return "interface{}";
  		else
  			return base;
@@ -376,9 +377,9 @@ class Haxelib2go {
 		case CFunction(args,_ret):
 			//return "func ()"; // TODO should be: "func (args...) ret_"
 			var rt:String = haxe2goType(_ret,h);
-			if(rt=="/*Void*/")
-				rt+= "uintptr";
-			return  /*CFunction*/rt; 
+			//if(rt=="/*Void*/")
+			//	rt+= "uintptr";
+			return  "/*CFunction*/"+rt;
 		case CEnum(name,params):
 			//trace("CEnum",name,params);
 			switch(name) {
@@ -436,6 +437,8 @@ class Haxelib2go {
 	}
 
   	static function goDefVal(gt:String):String {
+  		if(StringTools.startsWith(gt,"/*CFunction*/"))
+  			return goDefVal(gt.substr(13));
 		switch(gt){
 			case "/*Void*/": return "";
 			case "string": return "\"\"";
@@ -449,6 +452,8 @@ class Haxelib2go {
 	}
 
 	static function goTypeCast(gt:String,start:Bool):String {
+  		if(StringTools.startsWith(gt,"/*CFunction*/"))
+  			return goTypeCast(gt.substr(13),start);
 		switch(gt){
 			case "/*Void*/": return "";
 			case "string": return "";
